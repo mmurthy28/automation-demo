@@ -1,7 +1,7 @@
 name: Playwright tests sharded
 on:
   workflow_dispatch:
-  
+
 jobs:
   tests:
     timeout-minutes: 60
@@ -21,7 +21,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
-        run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: npx playwright test --reporter=blob --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           LOCALE: ${{ inputs.locale || 'en' }}
           PWTEST_BLOB_DO_NOT_WRITE_REPORT_ON_SUCCESS: ''
